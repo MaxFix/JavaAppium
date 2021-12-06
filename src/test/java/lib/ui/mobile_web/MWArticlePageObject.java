@@ -12,7 +12,7 @@ public class MWArticlePageObject extends ArticlePageObject {
         //#page-actions-watch #ca-watch.mw-ui-icon-wikimedia-star-base20 - не нажата
         //#page-actions-watch #ca-watch.mw-ui-icon-wikimedia-unStar-progressive - нажата
 
-        OPTIONS_REMOVE_FROM_MY_LIST_BTN = "css:#page-actions-watch #ca-watch.mw-ui-icon-wikimedia-unStar-progressive] watched button";
+        OPTIONS_REMOVE_FROM_MY_LIST_BTN = "css:#page-actions-watch #ca-watch.mw-ui-icon-wikimedia-unStar-progressive button";
         SUBSTRING_JS = "High-level programming language";
     }
 
