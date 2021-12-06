@@ -17,7 +17,7 @@ public class MyListsTest extends CoreTestCase {
             password = "q1W@e3R$t5Y^";
 
     @Test
-    public void testSaveFirstArticleToMyList() {
+    public void testSaveFirstArticleToMyList() throws InterruptedException {
 
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
