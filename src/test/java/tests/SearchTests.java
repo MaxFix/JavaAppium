@@ -72,8 +72,8 @@ public class SearchTests extends CoreTestCase {
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(searchLine);
-        SearchPageObject.waitForElementByTitleAndDescription("Java", "Island of Indonesia");
-        SearchPageObject.waitForElementByTitleAndDescription("Java (programming language)", "Object-oriented programming language");
-        SearchPageObject.waitForElementByTitleAndDescription("JavaScript", "Programming language");
+        SearchPageObject.waitForElementByTitleAndDescription("Java", "Indonesian island");
+        SearchPageObject.waitForElementByTitleAndDescription("Java", "Object-oriented programming language");
+        SearchPageObject.waitForElementByTitleAndDescription("Java", "High-level programming language");
     }
 }
