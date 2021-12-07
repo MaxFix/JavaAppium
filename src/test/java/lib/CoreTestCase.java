@@ -11,7 +11,6 @@ import java.time.Duration;
 public class CoreTestCase extends TestCase {
     private final static  String PLATFORM_IOS = "ios";
     private final static  String PLATFORM_ANDROID = "android";
-    private final static  String PLATFORM_MOBILE_WEB = "mobile_web";
 
     protected RemoteWebDriver driver;
 

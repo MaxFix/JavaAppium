@@ -58,7 +58,7 @@ public class MyListsTest extends CoreTestCase {
     }
 
     @Test
-    public void testSaveTwoArticles(){
+    public void testSaveTwoArticles() throws InterruptedException {
         String search_line = "Java";
         String js_title = "JavaScript";
 
@@ -74,13 +74,26 @@ public class MyListsTest extends CoreTestCase {
             ArticlePageObject.addArticleToMyList(name_of_folder);
         } else {
             ArticlePageObject.addArticleToMySaved();
-            ArticlePageObject.closeModal();
+            if(Platform.getInstance().isIOS()){
+                ArticlePageObject.closeModal();
+            }
+        }
+        if(Platform.getInstance().isMW()){
+            AuthorisationPageObject Auth = new AuthorisationPageObject(driver);
+            Auth.clickAuthBtn();
+            Auth.enterLoginData(login, password);
+            Auth.submitForm();
+            ArticlePageObject.waitForTitleElement();
+
+            assertEquals("We are not on the same page after login", article_title, ArticlePageObject.getArticletitle());
+
+            ArticlePageObject.addArticleToMySaved();
         }
         ArticlePageObject.closeArticle();
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(search_line);
-        SearchPageObject.clickByArticleWithSubstring("Programming language");
+        SearchPageObject.clickByArticleWithSubstring("High-level programming language");
 
         if (Platform.getInstance().isAndroid()) {
             ArticlePageObject.addArticleToMyListNotFirstTime(name_of_folder);
@@ -93,15 +106,16 @@ public class MyListsTest extends CoreTestCase {
             MyListsPageObject.clickForSpecificList(name_of_folder);
         }
         ArticlePageObject.closeArticle();
-        NavigationUI NavigationUi = NavigationUIFactory.get(driver);
-        NavigationUi.clickMyLists();
+        NavigationUI NavigationUI = NavigationUIFactory.get(driver);
+        NavigationUI.openNavigation();
+        NavigationUI.clickMyLists();
 
         if(Platform.getInstance().isAndroid()){
             MyListsPageObject.openFolderByName(name_of_folder);
         }
         MyListsPageObject.swipeByArticleToDelete(article_title);
         MyListsPageObject.waitForArticleToApearByTitle(js_title);
-        SearchPageObject.clickByArticleWithSubstring("High-level programming language");
+        MyListsPageObject.openFolderByName(js_title);
         String actual_title = ArticlePageObject.getArticletitle();
 
         Assert.assertEquals(js_title, actual_title);

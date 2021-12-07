@@ -5,9 +5,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class MWMyListsPageObject extends MyListsPageObject {
     static {
-        FOLDER_BY_NAME_TPL = "xpath://*[@name='{FOLDER_NAME}']";
+        FOLDER_BY_NAME_TPL = "xpath://h3[text()='{FOLDER_NAME}']";
         ARTICLE_BY_TITLE_TPL = "xpath://ul[contains(@class,'watchlist')]//h3[contains(text(),'{TITLE}')]";
-        REMOVE_FROM_SAVED_BTN = "xpath://ul[contains(@class,'watchlist')]//h3[contains(text(),'{TITLE}')]/../../div[contains(@class,'watched')]";
+        REMOVE_FROM_SAVED_BTN = "xpath://ul[contains(@class,'watchlist')]//h3[contains(text(),'Java (programming language)')]/../../a[contains(@href,'unwatch')]";
     }
 
     public MWMyListsPageObject(RemoteWebDriver driver){
