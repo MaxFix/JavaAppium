@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.*;
@@ -17,6 +19,11 @@ public class MyListsTest extends CoreTestCase {
             password = "q1W@e3R$t5Y^";
 
     @Test
+    @Features(value = {@Feature(value = "MyList"), @Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "Navigation")})
+    @DisplayName("Save article to MyList first time")
+    @Description("Search, choose and add article to MyList for the first time")
+    @Step("Start testSaveFirstArticleToMyList")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void testSaveFirstArticleToMyList() throws InterruptedException {
 
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
@@ -58,6 +65,11 @@ public class MyListsTest extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value = "MyList"), @Feature(value = "Search"), @Feature(value = "Article"), @Feature(value = "Navigation")})
+    @DisplayName("Save two article and delete one of this")
+    @Description("Search, choose and add two article to MyList, when we delete one from MyList and check")
+    @Step("Start testSaveTwoArticles")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testSaveTwoArticles() throws InterruptedException {
         String search_line = "Java";
         String js_title = "JavaScript";
