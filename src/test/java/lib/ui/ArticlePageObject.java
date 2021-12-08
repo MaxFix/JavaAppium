@@ -1,6 +1,7 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -26,12 +27,15 @@ abstract public class ArticlePageObject extends MainPageObject{
         super(driver);
     }
 
+    @Step("Waiting for title on the article page")
     public WebElement waitForTitleElement(){
         return this.waitForElementPresent(TITLE, "Cannot find article title on page", 15);
     }
 
+    @Step("Get article title")
     public String getArticletitle(){
         WebElement title_element = waitForTitleElement();
+        screenshot(this.takeScreenshoot("article_title"));
         if(Platform.getInstance().isAndroid()){
             return title_element.getAttribute("text");
         } else if(Platform.getInstance().isIOS()){
@@ -41,6 +45,7 @@ abstract public class ArticlePageObject extends MainPageObject{
         }
     }
 
+    @Step("Swiping to footer on the article page")
     public void swipeToFooter(){
         if(Platform.getInstance().isAndroid()){
             this.swipeUpToFindElement(FOOTER_ELEMENT, "Cannot find the end of article", 40);
@@ -51,6 +56,7 @@ abstract public class ArticlePageObject extends MainPageObject{
         }
     }
 
+    @Step("Adding the article to MyList")
     public void addArticleToMyList(String name_of_folder){
         this.waitForElementAndClick(OPTIONS_BTN,
                 "Cannot find button to open article options", 5);
@@ -71,6 +77,7 @@ abstract public class ArticlePageObject extends MainPageObject{
                 "Cannot press OK button", 5);
     }
 
+    @Step("Add article to MyList without onboarding")
     public void addArticleToMyListNotFirstTime(String name_of_folder){
         this.waitForElementAndClick(OPTIONS_BTN,
                 "Cannot find button to open article options", 5);
@@ -79,6 +86,7 @@ abstract public class ArticlePageObject extends MainPageObject{
                 "Cannot find option to add article to reading list", 5);
     }
 
+    @Step("Close article")
     public void closeArticle(){
         if (Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()){
             this.waitForElementAndClick(CLOSE_ARTICLE_BTN,
@@ -88,10 +96,12 @@ abstract public class ArticlePageObject extends MainPageObject{
         }
     }
 
+    @Step("Assert article title without timeout")
     public void assertArticleTitleWithoutTimeout(){
         this.assertElementPresentWithoutTimeout(TITLE, "Cannot find article title text");
     }
 
+    @Step("Add article to MySaved")
     public void addArticleToMySaved(){
         if(Platform.getInstance().isMW()){
             this.removeArticleFromSavedIfItAdded();
@@ -99,6 +109,7 @@ abstract public class ArticlePageObject extends MainPageObject{
             this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BTN, "Cannot find option to add article to reading list", 5);
     }
 
+    @Step("Remove article from MySaved")
     public void removeArticleFromSavedIfItAdded(){
         if (this.isElementPresent(OPTIONS_REMOVE_FROM_MY_LIST_BTN)){
             this.waitForElementAndClick(OPTIONS_REMOVE_FROM_MY_LIST_BTN,
@@ -108,6 +119,7 @@ abstract public class ArticlePageObject extends MainPageObject{
         }
     }
 
+    @Step("Close modal window with login offer")
     public void closeModal(){
         this.waitForElementAndClick(CLOSE_MODAL, "Cannot find X to close modal window", 5);
     }
